@@ -119,5 +119,34 @@ namespace HYDROS_APDU_GENERATOR
         {
             Generate();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            var randIt = new Random();
+            var randFl = new Random();
+            var idtotem = 'T';
+            var numTotem = randIt.Next(100);
+            var numero = randIt.Next(500);
+            var donnees = new float[4];
+
+            for (int i = 0; i < donnees.Length; i++) {
+                if (i == 2) donnees[i] = randFl.Next(100);
+                else donnees[i] = NextFloat(randFl);
+            }
+
+            textBox1.Text = idtotem.ToString() + (numTotem < 10 ? $"0{numTotem}" : $"{numTotem}");
+            textBox7.Text = numero.ToString();
+            textBox3.Text = donnees[0].ToString();
+            textBox4.Text = donnees[1].ToString();
+            textBox5.Text = donnees[2].ToString();
+            textBox6.Text = donnees[3].ToString();
+        }
+
+        static float NextFloat(Random random)
+        {
+            double mantissa = (random.NextDouble() * 2.0) - 1.0;
+            double exponent = Math.Pow(2.0, random.Next(-126, 128));
+            return (float)(mantissa * exponent);
+        }
     }
 }
